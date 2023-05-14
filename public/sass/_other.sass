@@ -1,0 +1,17 @@
+@mixin flex($jc, $ai)
+  display: flex
+  justify-content: $jc
+  align-items: $ai
+@mixin flex-basis($value)
+  flex-basis: $value
+@mixin box-shadow($value)
+  -webkit-box-shadow: $value
+  -moz-box-shadow: $value
+  box-shadow: $value
+@mixin fs($value)
+  font-size: $value + px
+@mixin ls($value)
+  letter-spacing: $value
+@mixin transition($time)
+  -webkit-transition: all $time
+  transition: all $time 
