@@ -47,7 +47,7 @@ class Message extends DivElem {
     this.el.textContent = text;
   }
 }
-// Отмечаем ранее выбранный переключатель 
+// Отмечаем ранее выбранный переключатель
 const checkedLabel = (parent, child) => {
   const result = parent.querySelector(child);
   if (result) {
@@ -135,13 +135,16 @@ const paramsFilter = (parent) => {
 const notification = (res) => {
   let msg;
   if (res.status === 200) {
-    msg = 'Запрос успешно отправлен!';
+    msg = "Запрос успешно отправлен!";
   } else {
-    msg = 'Возникла ошибка при отправке запроса!';
+    msg = "Возникла ошибка при отправке запроса!";
   }
-  const notif = new Message({ className: "params__notification", text: `${msg}` });
+  const notif = new Message({
+    className: "params__notification",
+    text: `${msg}`,
+  });
   notif.appendTo(body);
-  notif.el.addEventListener('click', (e) => e.target.remove())
+  notif.el.addEventListener("click", (e) => e.target.remove());
 };
 // Отправка данных запроса на сервер
 const sendData = async () => {
@@ -179,7 +182,7 @@ const handlerEditor = (e) => {
     target.tagName !== "BUTTON"
   )
     return;
-  
+
   const saveToLocal = (key, value) => {
     localStorage.setItem(key, value);
   };
@@ -309,12 +312,15 @@ windowParams.addEventListener("click", (e) => handlerEditor(e));
 
 const setStorageValues = () => {
   return new Promise((resolve) => {
-    if (
-      localStorage.getItem("theme") === "dark" ||
-      curTime() > "19:00:00" ||
-      curTime() < "09:00:00"
-    ) darkTheme(themeChanger);
-    else lightTheme(themeChanger);
+    if (localStorage.getItem("theme")) {
+      localStorage.getItem("theme") === "dark"
+        ? darkTheme(themeChanger)
+        : lightTheme(themeChanger);
+    } else {
+      (curTime() > "19:00:00" || curTime() < "09:00:00")
+        ? darkTheme(themeChanger)
+        : lightTheme(themeChanger);
+    }
 
     for (const el of getInputsWithDataset()) {
       const elKey = el.className.split("__")[1];
