@@ -23,10 +23,10 @@
   animation-fill-mode: forwards
 
 @mixin shadow-light
-  text-shadow: 0px 0px 3px #4deaff
+  text-shadow: -1px 0px 7px #4deaff
 
 @mixin shadow-dark
-  text-shadow: 0px 0px 5px $color-blue, 0px 0px 10px $color-blue, 0px 0px 15px #4deaff
+  text-shadow: -1px 0px 7px #1900ff
 
 *
   margin: $margin-null
@@ -118,13 +118,12 @@ label
   margin-left: 10px
   padding: 5px 20px
   color: $color-white
-  background-color: $color-blue
+  background-color: rgba(0, 0, 0, 0.7)
   border-radius: 17.5px
-  border: 1px solid rgba(0, 0, 0, 0.1)
+  border: 1px solid rgba(0, 0, 0, 0.7)
   @include ot.transition(.5s)
   @include ot.fs(14)
   body.dark &
-    background-color: $color-black
     &:hover
       background-color: $color-blue
   &:hover
@@ -186,7 +185,7 @@ label
     @include theme-text($light-theme: true)
     body.dark &
       @include theme-text($light-theme: false)
-      @include shadow-dark
+      text-shadow: 0px 0px 5px $color-blue, 0px 0px 10px $color-blue, 0px 0px 15px #4deaff
 
   &__theme-change
     text-decoration: none
@@ -237,7 +236,6 @@ label
     @include ot.fs(20)
     @include ot.ls(3px)
     @include ot.transition(.5s)
-    @include shadow-light
     body.dark &
       @include shadow-dark
 

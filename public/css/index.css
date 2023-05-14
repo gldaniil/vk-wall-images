@@ -118,15 +118,12 @@ body.dark .params__filter-edit, body.dark .params__count-edit, body.dark .params
   margin-left: 10px;
   padding: 5px 20px;
   color: #ffffff;
-  background-color: #1900ff;
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 17.5px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.7);
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
   font-size: 14px;
-}
-body.dark .params__decline, body.dark .params__accept {
-  background-color: #000000;
 }
 body.dark .params__decline:hover, body.dark .params__accept:hover {
   background-color: #1900ff;
@@ -292,10 +289,9 @@ body.dark .params__wrapper {
   letter-spacing: 3px;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
-  text-shadow: 0px 0px 3px #4deaff;
 }
 body.dark .params__title-h2 {
-  text-shadow: 0px 0px 5px #1900ff, 0px 0px 10px #1900ff, 0px 0px 15px #4deaff;
+  text-shadow: -1px 0px 7px #1900ff;
 }
 .params__title {
   padding: 20px 0;
