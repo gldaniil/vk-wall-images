@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gldaniil/vk-wall-imgs.git"
+    "url": "git+https://github.com/gldaniil/vk-wall-images.git"
   },
   "keywords": [
     "UI",
@@ -22,9 +22,9 @@
   "author": "gldaniil",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gldaniil/vk-wall-imgs/issues"
+    "url": "https://github.com/gldaniil/vk-wall-images/issues"
   },
-  "homepage": "https://github.com/gldaniil/vk-wall-imgs#readme",
+  "homepage": "https://github.com/gldaniil/vk-wall-images#readme",
   "dependencies": {
     "ejs": "^3.1.9",
     "express": "^4.18.2",
