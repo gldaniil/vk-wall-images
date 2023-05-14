@@ -1,10 +1,9 @@
 {
-  "name": "vk-wall-imgs",
+  "name": "vk-wall-images",
   "version": "1.0.1",
   "description": "Удобный UI для метода wall.get VK API.",
   "main": "app.js",
   "scripts": {
-    "test": "start app.js",
     "serve": "nodemon app.js"
   },
   "repository": {
