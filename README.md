@@ -20,3 +20,5 @@ npm install
 node app.js 
 ```
 Если все шаги были выполнены корректно, то автоматически появится вкладка браузера и Вы можете приступать к работе!
+## Интерфейс ##
+<img src="https://raw.githubusercontent.com/gldaniil/vk-wall-images/main/example.webp" width=90%>
