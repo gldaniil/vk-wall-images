@@ -1,7 +1,9 @@
-import open from "open";
+import fs from "fs";
 import path from "path";
+import open from "open";
 import express from "express";
-import { fileURLToPath } from 'url';
+import folder from './config.js';
+import { fileURLToPath } from "url";
 import router from "./routes/index.js";
 
 const app = express();
@@ -19,7 +21,20 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", router);
 
-app.listen(PORT, async () => {
-  console.log(`Сервер был запущен на ${process.env.DOMAIN}:${PORT}...`);
-  await open(`http://localhost:${PORT}/`);
+const checkFolder = () => {
+  console.log("Проверяю наличие каталога изображений...");
+  fs.access(folder, (e) => {
+    if (e) {
+      console.log("Путь не найден, создаю каталог");
+      fs.mkdirSync(folder, (e) => {
+        if (e) throw e;
+      });
+    } else console.log("...каталог на месте");
+  });
+};
+
+app.listen(PORT, () => {
+  console.log(`Сервер был запущен, порт: ${PORT}...`);
+  checkFolder();
+  open(`http://localhost:${PORT}/`);
 });
