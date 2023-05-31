@@ -280,39 +280,18 @@ const requestOptions = {
   filter: "all",
   v: 5.131,
 };
-// Тёмная тема
-const darkTheme = (target) => {
-  target.textContent = "тёмная";
-  body.classList.add("dark");
-};
-// Светлая
-const lightTheme = (target) => {
-  target.textContent = "светлая";
-  body.classList.add("light");
-};
 
 const body = document.querySelector("body");
-const themeChanger = body.querySelector(".header__theme-change");
 
 // Делегирование событий для окна params__window
 const windowParams = document.querySelector(".params__window");
 windowParams.addEventListener("click", (e) => handlerEditor(e));
 
-// Смена темы при клике на "Тема: { светлая/тёмная }"
-const themaChanga = new ThemeChanger(".header__theme-change");
-themaChanga.addEvent()
-
 const setStorageValues = () => {
   return new Promise((resolve) => {
-    if (localStorage.getItem("theme")) {
-      localStorage.getItem("theme") === "dark"
-        ? darkTheme(themeChanger)
-        : lightTheme(themeChanger);
-    } else {
-      curTime() > "19:00:00" || curTime() < "09:00:00"
-        ? darkTheme(themeChanger)
-        : lightTheme(themeChanger);
-    }
+    // Экземпляр класса для темы страницы
+    const theme = new ThemeChanger(".header__theme-change");
+    theme.localTheme();
 
     for (const el of getInputsWithDataset()) {
       const elKey = el.className.split("__")[1];

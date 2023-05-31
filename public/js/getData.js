@@ -1,9 +1,11 @@
-const getDatetime = () => {
+const getTime = () => {
   const dateObj = new Date();
 
   let hour = dateObj.getHours();
   let minute = dateObj.getMinutes();
   let second = dateObj.getSeconds();
+
+  if (hour < 10) hour = "0" + hour;
 
   if (minute < 10) minute = "0" + minute;
 
@@ -12,4 +14,4 @@ const getDatetime = () => {
   return `${hour}:${minute}:${second}`;
 };
 
-export default getDatetime
+export default getTime

@@ -36,5 +36,5 @@ const checkFolder = () => {
 app.listen(PORT, () => {
   console.log(`Сервер был запущен, порт: ${PORT}...`);
   checkFolder();
-  // open(`http://localhost:${PORT}/`);
+  open(`http://localhost:${PORT}/`);
 });
