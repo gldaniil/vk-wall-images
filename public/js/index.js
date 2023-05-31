@@ -1,3 +1,4 @@
+import ThemeChanger from "./ThemeChanger.mjs";
 import curTime from "./getData.js";
 
 // Класс элементов
@@ -292,23 +293,14 @@ const lightTheme = (target) => {
 
 const body = document.querySelector("body");
 const themeChanger = body.querySelector(".header__theme-change");
-// Смена темы при клике на "Тема: { светлая/тёмная }"
-themeChanger.addEventListener("click", (e) => {
-  if (body.classList.contains("light")) {
-    body.classList.remove("light");
-    localStorage.setItem("theme", "dark");
-    darkTheme(e.target);
-  } else {
-    body.classList.remove("dark");
-    localStorage.setItem("theme", "light");
-    lightTheme(e.target);
-  }
-  e.preventDefault();
-});
 
 // Делегирование событий для окна params__window
 const windowParams = document.querySelector(".params__window");
 windowParams.addEventListener("click", (e) => handlerEditor(e));
+
+// Смена темы при клике на "Тема: { светлая/тёмная }"
+const themaChanga = new ThemeChanger(".header__theme-change");
+themaChanga.addEvent()
 
 const setStorageValues = () => {
   return new Promise((resolve) => {
@@ -317,7 +309,7 @@ const setStorageValues = () => {
         ? darkTheme(themeChanger)
         : lightTheme(themeChanger);
     } else {
-      (curTime() > "19:00:00" || curTime() < "09:00:00")
+      curTime() > "19:00:00" || curTime() < "09:00:00"
         ? darkTheme(themeChanger)
         : lightTheme(themeChanger);
     }
