@@ -3,14 +3,13 @@ import CreatingElem from "./Labels.mjs";
 import curTime from "./getData.js";
 
 const testInpute = [
-  { tag: "div", id: "ja" },
-  { tag: "div", id: "ja" },
-  { tag: "div", id: "ja" },
+  { tag: "input", id: "owner_id", type: "radio", name: "group"},
+  { tag: "input", id: "domain", type: "radio", name: "group"},
 ];
 console.log(testInpute);
 
 for (const testSend of testInpute) {
-  new CreatingElem(testSend);
+  const testikk = new CreatingElem(testSend).create(".params__window");
 }
 
 // Класс элементов

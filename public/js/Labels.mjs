@@ -1,18 +1,28 @@
 export default class CreatingElem {
   constructor(obj) {
-    this.el = document.createElement(obj.tag);
-    this.el.id = obj.id;
-    this.create();
+    this.obj = obj;
   }
-  create() {
-    console.log(this.el);
+  #append(arr, parent) {
+    parent = document.querySelector(parent);
+    arr.forEach(el => {
+      parent.append(el)
+    });
   }
-  append() {
-    console.log("skip");
+  #label(htmlFor, text) {
+    const label = document.createElement("label");
+    label.htmlFor = htmlFor;
+    label.textContent = text;
+    return label;
   }
-  input(id, type, name) {
-    this.elem.id = id;
-    this.elem.type = type;
-    this.elem.name = name;
+  create(parent) {
+    this.el = document.createElement(this.obj.tag);
+    if (this.obj.tag === "input") {
+      const domain = this.obj.id;
+      const text = domain.charAt(0).toUpperCase() + domain.slice(1);
+      this.el.id = domain;
+      this.el.type = this.obj.type;
+      this.el.name = this.obj.name;
+      this.#append([this.el, this.#label(domain, text)], parent)
+    }
   }
 }
