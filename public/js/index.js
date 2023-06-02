@@ -1,5 +1,17 @@
 import ThemeChanger from "./ThemeChanger.mjs";
+import CreatingElem from "./Labels.mjs";
 import curTime from "./getData.js";
+
+const testInpute = [
+  { tag: "div", id: "ja" },
+  { tag: "div", id: "ja" },
+  { tag: "div", id: "ja" },
+];
+console.log(testInpute);
+
+for (const testSend of testInpute) {
+  new CreatingElem(testSend);
+}
 
 // Класс элементов
 class Creating {
