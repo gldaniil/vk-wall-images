@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import fs from "fs";
+import { minHeight } from "../config.js";
 
 const saveImages = async (values) => {
   for (const el of values) {
@@ -28,15 +29,13 @@ const dataExtract = (result) => {
     for (const item of items) {
       for (const subitem of item.attachments) {
         if (subitem.type === "photo") {
-          let height = 0,
-            url;
+          let height = minHeight;
           for (const img of subitem.photo.sizes) {
             if (img.height > height) {
               height = img.height;
-              url = img.url;
+              arr.push(img.url);
             }
           }
-          arr.push(url);
           continue;
         }
         if (subitem.type === "doc") {

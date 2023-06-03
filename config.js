@@ -1,2 +1,7 @@
 // Путь для сохранения изображений
-export default "output"
+const folder = "output"
+const minHeight = 1200
+export {
+  folder,
+  minHeight
+}

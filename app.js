@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import open from "open";
 import express from "express";
-import folder from './config.js';
+import { folder } from './config.js';
 import { fileURLToPath } from "url";
 import router from "./routes/index.js";
 
