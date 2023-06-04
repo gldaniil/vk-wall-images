@@ -1,7 +1,3 @@
 // Путь для сохранения изображений
-const folder = "output"
-const minHeight = 1200
-export {
-  folder,
-  minHeight
-}
+export const folder = "output";
+export const minHeight = 1200;
