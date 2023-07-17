@@ -1,4 +1,4 @@
-import curTime from "./getData.js";
+import { getTime } from "./datetime.js";
 
 export default class ThemeChanger {
   #dark = "dark";
@@ -24,7 +24,7 @@ export default class ThemeChanger {
   }
   localTheme() {
     const storedTheme = localStorage.getItem("theme");
-    const time = curTime();
+    const time = getTime();
     if (storedTheme) {
       this.#theme(
         storedTheme,

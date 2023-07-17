@@ -1,15 +1,14 @@
 import ThemeChanger from "./ThemeChanger.mjs";
 import CreatingElem from "./Labels.mjs";
-import curTime from "./getData.js";
 
 document.querySelector(".params__inner").addEventListener("click", (e) => {
-  console.log(e.target)
-  console.log(e.currentTarget)
-})
+  console.log(e.target);
+  console.log(e.currentTarget);
+});
 
 const testInpute = [
-  { tag: "input", id: "owner_id", type: "radio", name: "group"},
-  { tag: "input", id: "domain", type: "radio", name: "group"},
+  { tag: "input", id: "owner_id", type: "radio", name: "group" },
+  { tag: "input", id: "domain", type: "radio", name: "group" },
 ];
 console.log(testInpute);
 
