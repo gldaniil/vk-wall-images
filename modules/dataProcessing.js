@@ -1,13 +1,17 @@
 import fetch from "node-fetch";
 import fs from "fs";
-import { minHeight } from "../config.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const saveImages = async (values) => {
   for (const el of values) {
     await new Promise((resolve) => setTimeout(resolve, 500));
     fetch(el)
       .then((res) => {
-        const way = fs.createWriteStream(`output/${Date.now()}.jpg`);
+        const way = fs.createWriteStream(
+          `${process.env.FOLDER}/${Date.now()}.jpg`
+        );
         res.body.pipe(way);
       })
       .catch((err) => {
@@ -24,25 +28,21 @@ const dataExtract = (result) => {
     return;
   }
   if (result.response) {
-    const arr = [];
-    const items = result.response.items;
-    for (const item of items) {
-      for (const subitem of item.attachments) {
-        if (subitem.type === "photo") {
-          let height = minHeight;
-          for (const img of subitem.photo.sizes) {
-            if (img.height > height) {
-              height = img.height;
-              arr.push(img.url);
-            }
-          }
-          continue;
-        }
+    const arr = result.response.items
+      .flatMap((item) => item.attachments)
+      .filter((subitem) => subitem.type === "photo" || subitem.type === "doc")
+      .map((subitem) => {
         if (subitem.type === "doc") {
-          arr.push(subitem.doc.url);
+          return subitem.doc.url;
         }
-      }
-    }
+        if (subitem.type === "photo") {
+          const bestSize = subitem.photo.sizes.reduce(
+            (acc, img) => (img.height > acc.height ? img : acc),
+            { height: process.env.MINHEIGHT }
+          );
+          return bestSize.url;
+        }
+      });
     saveImages(arr);
   }
 };
