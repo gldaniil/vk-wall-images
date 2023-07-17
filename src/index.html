@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/index.css">
+  <meta name="robots" content="noindex">
+  <title>Параметры парсера
+  </title>
+</head>
+
+<body class="">
+  <div class="preloader visible"></div>
+  <div class="wrapper">
+    <header class="header">
+      <div class="header__wrapper">
+        <div class="container">
+          <div class="header__inner">
+            <div class="header__item header__theme">
+              <span>Тема: </span><a href="" class="header__theme-change"></a>
+            </div>
+            <div class="header__item header__other">
+              <a href="https://github.com/gldaniil?tab=repositories" target="_blank" class="header__link">Другие
+                проекты</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <section id="params" class="params">
+        <div class="params__wrapper">
+          <div class="params__container">
+            <div class="params__inner">
+              <div class="params__window">
+                <h1 class="params__title-h1">Параметры парсера</h1>
+                <!-- Ключ доступа -->
+                <div class="params__access">
+                  <div class="params__title">
+                    <h2 class="params__title-h2">Ключ доступа</h2>
+                    <span class="params__access-token-edit">изменить</span>
+                  </div>
+                  <div class="params__value">
+                    <input class="params__access-token" value="" disabled data-prop="access_token"
+                      placeholder="Введите ключ доступа">
+                  </div>
+                </div>
+                <!-- Адрес группы -->
+                <div class="params__group">
+                  <div class="params__title">
+                    <h2 class="params__title-h2">Адрес группы</h2>
+                    <span class="params__group-edit">изменить</span>
+                  </div>
+                  <div class="params__value">
+                    <input class="params__group-id" value="" disabled data-prop="" placeholder="Введите адрес группы">
+                  </div>
+                </div>
+                <!-- Смещение -->
+                <div class="params__offset">
+                  <div class="params__title">
+                    <h2 class="params__title-h2">Смещение</h2>
+                    <span class="params__offset-edit">изменить</span>
+                  </div>
+                  <div class="params__value">
+                    <input class="params__offset-num" value="" disabled data-prop="offset"
+                      placeholder="Введите начальную позицию">
+                  </div>
+                </div>
+                <!-- Количество записей -->
+                <div class="params__count">
+                  <div class="params__title">
+                    <h2 class="params__title-h2">Количество записей</h2>
+                    <span class="params__count-edit">изменить</span>
+                  </div>
+                  <div class="params__value">
+                    <input class="params__count-num" value="" disabled data-prop="count"
+                      placeholder="Введите количество обрабатываемых записей">
+                  </div>
+                </div>
+                <!-- Фильтр -->
+                <div class="params__filter">
+                  <div class="params__title">
+                    <h2 class="params__title-h2">Тип записей</h2>
+                  </div>
+                  <div class="params__value">
+                    <input class="params__filter-str" value="" data-prop="filter">
+                  </div>
+                </div>
+                <!-- Выполнить запрос -->
+                <div class="params__request">
+                  <button type="submit" class="params__request-button">
+                    Выполнить запрос
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="./js/index.js"></script>
+</body>
+
+</html>
