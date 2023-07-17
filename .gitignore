@@ -1,7 +1,0 @@
-node_modules
-output
-public/fonts
-.env
-database.db
-initDatabase.js
-.gitignore
