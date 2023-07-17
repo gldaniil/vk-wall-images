@@ -25,10 +25,9 @@ app.get("/", (req, res) => {
 
 console.log(__dirname);
 
-app.post("/", (req, res) => {
-  const body = req.body;
-  request(body);
-  res.sendStatus(200);
+app.post("/", async (req, res) => {
+  const result = await request(req.body);
+  res.send(String(result));
 });
 
 app.listen(PORT, () => {
