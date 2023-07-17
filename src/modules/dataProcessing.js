@@ -5,18 +5,19 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const saveImages = async (values) => {
-  for (const el of values) {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    fetch(el)
-      .then((res) => {
-        const way = fs.createWriteStream(
-          `${process.env.FOLDER}/${Date.now()}.jpg`
-        );
-        res.body.pipe(way);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  if (values.length !== 0) {
+    for (const el of values) {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      fetch(el)
+        .then((res) => {
+          const fileName = `${process.env.FOLDER}/${Date.now()}.jpg`;
+          const way = fs.createWriteStream(fileName);
+          res.body.pipe(way);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }
 };
 
@@ -38,29 +39,33 @@ const dataExtract = (result) => {
         if (subitem.type === "photo") {
           const bestSize = subitem.photo.sizes.reduce(
             (acc, img) => (img.height > acc.height ? img : acc),
-            { height: process.env.MINHEIGHT }
+            { height: process.env.MIN_HEIGHT }
           );
           return bestSize.url;
         }
       });
-    saveImages(arr);
+    return arr.filter(Boolean);
   }
 };
 
-const request = (body) => {
+async function fetchVKData(url) {
+  const response = await fetch(url);
+  const json = await response.json();
+  const result = await dataExtract(json);
+  return result;
+}
+
+export default async (body) => {
   const arr = Object.keys(body);
-  let url = "https://api.vk.com/method/wall.get?";
-  Object.keys(body).forEach((el, i) => {
+  const params = arr.map((el, i) => {
     if (i !== arr.length - 1) {
-      url = `${url}${el}=${body[el]}&`;
+      return `${el}=${body[el]}&`;
     } else {
-      url = `${url}${el}=${body[el]}`;
+      return `${el}=${body[el]}`;
     }
   });
-  fetch(url)
-    .then((response) => response.json())
-    .then((json) => dataExtract(json))
-    .catch((e) => console.log(e));
+  const url = `https://api.vk.com/method/wall.get?${params.join("")}`;
+  const urls = await fetchVKData(url);
+  saveImages(urls);
+  return urls.length;
 };
-
-export default request;
