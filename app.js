@@ -2,9 +2,11 @@ import fs from "fs";
 import path from "path";
 import open from "open";
 import express from "express";
-import { folder } from './config.js';
+import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import router from "./routes/index.js";
+
+dotenv.config();
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -23,10 +25,10 @@ app.use("/", router);
 
 const checkFolder = () => {
   console.log("Проверяю наличие каталога изображений...");
-  fs.access(folder, (e) => {
+  fs.access(process.env.FOLDER, (e) => {
     if (e) {
       console.log("Путь не найден, создаю каталог");
-      fs.mkdirSync(folder, (e) => {
+      fs.mkdirSync(process.env.FOLDER, (e) => {
         if (e) throw e;
       });
     } else console.log("...каталог на месте");
