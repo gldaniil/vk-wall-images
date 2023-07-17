@@ -4,7 +4,7 @@ import open from "open";
 import express from "express";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
-import router from "./routes/index.js";
+import request from "./src/modules/dataProcessing.js";
 
 dotenv.config();
 
@@ -12,16 +12,11 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-
 const PORT = process.env.PORT ?? 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
-
-app.use("/", router);
+app.use(express.static(path.join(__dirname, "src")));
 
 const checkFolder = () => {
   console.log("Проверяю наличие каталога изображений...");
@@ -34,6 +29,18 @@ const checkFolder = () => {
     } else console.log("...каталог на месте");
   });
 };
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "/index.html"));
+});
+
+console.log(__dirname);
+
+app.post("/", (req, res) => {
+  const body = req.body;
+  request(body);
+  res.sendStatus(200);
+});
 
 app.listen(PORT, () => {
   console.log(`Сервер был запущен, порт: ${PORT}...`);
