@@ -23,11 +23,8 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/index.html"));
 });
 
-console.log(__dirname);
-
-app.post("/", async (req, res) => {
-  const result = await request(req.body);
-  res.send(String(result));
+app.post("/", (req, res) => {
+  request(req.body, res);
 });
 
 app.listen(PORT, () => {
