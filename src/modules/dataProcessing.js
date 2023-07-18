@@ -1,26 +1,38 @@
+import sqlite3 from "sqlite3";
 import fetch from "node-fetch";
 import fs from "fs";
 import dotenv from "dotenv";
+import { getDate } from "../js/datetime.js";
+import { insert, select } from "./dbOperations.js";
 
 dotenv.config();
 
-const saveImages = async (values) => {
-  if (values.length !== 0) {
-    for (const el of values) {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      fetch(el)
-        .then((res) => {
-          const fileName = `${process.env.FOLDER}/${Date.now()}.jpg`;
-          const way = fs.createWriteStream(fileName);
-          res.body.pipe(way);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+const checkDirectory = (path) => {
+  if (!fs.existsSync(path)) {
+    fs.mkdirSync(path, {
+      recursive: true,
+    });
   }
 };
 
+const saveFile = async (urls, domain) => {
+  const filePath = `${process.env.FOLDER}/${getDate()}/${domain}`;
+  checkDirectory(filePath);
+  const db = new sqlite3.Database(process.env.DB_NAME);
+  const existingUrls = await select(db, domain);
+  for (const url of urls) {
+    if (existingUrls.includes(url)) continue;
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    const fileName = `${filePath}/${Date.now()}.jpg`;
+    const response = await fetch(url);
+    if (response.status === 200) {
+      const way = fs.createWriteStream(fileName);
+      response.body.pipe(way);
+      await insert(db, domain, url);
+    } else break;
+  }
+  db.close();
+};
 const dataExtract = (result) => {
   if (result.error) {
     console.log(`Код ошибки - ${result.error.error_code}`);
@@ -55,7 +67,7 @@ async function fetchVKData(url) {
   return result;
 }
 
-export default async (body) => {
+export default async (body, res) => {
   const arr = Object.keys(body);
   const params = arr.map((el, i) => {
     if (i !== arr.length - 1) {
@@ -66,6 +78,8 @@ export default async (body) => {
   });
   const url = `https://api.vk.com/method/wall.get?${params.join("")}`;
   const urls = await fetchVKData(url);
-  saveImages(urls);
-  return urls.length;
+  res.send(urls);
+  if (urls.length !== 0) {
+    saveFile(urls, body.domain);
+  }
 };
