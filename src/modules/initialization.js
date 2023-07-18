@@ -19,8 +19,16 @@ export default (name) => {
         if (err) return console.log(err);
       }
     );
+
+    db.run(`CREATE TABLE "history" (
+      "id"	INTEGER NOT NULL UNIQUE,
+      "domain"	TEXT,
+      "url"	TEXT,
+      PRIMARY KEY("id" AUTOINCREMENT)
+    );`);
+
     console.log(`--------------\n${name} создан\n--------------`);
-    // close the database connection
+
     db.close();
   }
 };
