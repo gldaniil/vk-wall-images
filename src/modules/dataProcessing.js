@@ -80,6 +80,6 @@ export default async (body, res) => {
   const urls = await fetchVKData(url);
   res.send(urls);
   if (urls.length !== 0) {
-    saveFile(urls, body.domain);
+    saveFile(urls, body.owner_id || body.domain);
   }
 };
